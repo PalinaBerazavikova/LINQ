@@ -17,15 +17,26 @@ namespace LINQTask
             {
                 Console.Write(a + " ");
             }
-            Console.WriteLine();
-            Console.WriteLine("Prime numbers "+array.FindPrimesCount());
-            Console.WriteLine("Special numbers " + array.FindSpecialNumbers());
-            Console.WriteLine("Has numbers divided by five " + array.HasNumberDividedByFive());
-            BigInteger[] newFAray = array.SqrtWithDigitTwo();
-            foreach(BigInteger num in newFAray)
-            {
-                Console.WriteLine(num);
-            }
+            Console.WriteLine("Prime numbers " + array.FindPrimesCount());
+
+            array.FindSpecialNumbers1();
+            
+           
+            //Console.WriteLine();
+            //Console.WriteLine("Prime numbers " + array.FindPrimesCount());
+            //Console.WriteLine("Special numbers " + array.FindSpecialNumbers());
+            //Console.WriteLine("Has numbers divided by five " + array.HasNumberDividedByFive());
+            //BigInteger[] newFAray = array.SqrtWithDigitTwo();
+            //foreach (BigInteger num in newFAray)
+            //{
+            //    Console.WriteLine(num);
+            //}
+            //BigInteger[] newAray = array.SortBySecondDigit();
+            //Console.WriteLine("sorted");
+            //foreach (BigInteger a in newAray)
+            //{
+            //    Console.Write(a + " ");
+            //}
             Console.ReadKey();
         }
     }
