@@ -100,6 +100,28 @@ namespace LINQTask
             return a;
         }
 
+        public static void GetSpecialLastTwoDigits(this BigInteger[] array)
+        {
+            BigInteger[] a = { 0}, c = { };
+            List<BigInteger> list = new List<BigInteger>();
+            while(array.Length != 0)
+            {
+                a = array.Take(5).ToArray();
+                var b = a.Where(x => x % 5 == 0).ToArray();
+                array = array.Skip(5).ToArray();
+                if(b.Length > 0)
+                {
+                    c = a.Where(x => x % 3 == 0).ToArray();
+                    foreach (var f in c) list.Add(f);
+
+                }
+            }
+            foreach (var f in list) Console.WriteLine(f);
+            List<BigInteger> result = new List<BigInteger>();
+            result = list.Where(x=> x!=0).Select(x => (BigInteger)x % 100).ToList();
+            foreach (var f in result) Console.WriteLine(f);
+        }
+
 
 
         public static int FindSumOfDigits(this BigInteger number)

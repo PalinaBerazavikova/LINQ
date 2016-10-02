@@ -18,7 +18,7 @@ namespace LINQTask
                 Console.Write(a + " ");
             }
             Console.WriteLine($"Prime numbers {array.FindPrimesCount()}");
-
+            array.GetSpecialLastTwoDigits();
             //array.FindSpecialNumbers1();
             
            
