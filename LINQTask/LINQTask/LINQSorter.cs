@@ -62,20 +62,20 @@ namespace LINQTask
             return a.Length ;
         }
 
-        public static int FindSpecialNumbers1(this BigInteger[] array)
-        {
+        //public static int FindSpecialNumbers1(this BigInteger[] array)
+        //{
 
-            BigInteger[] a = array.Where(x => x != 0).ToArray();
+        //    BigInteger[] a = array.Where(x => x != 0).ToArray();
 
-            for(int i = 0; i< a.Length; i++)
-            {
-                string result = a[i].ToString();
-                var intList = result.Select(digit => int.Parse(digit.ToString())).Sum();
-                Console.WriteLine(intList);
-            }
+        //    for(int i = 0; i< a.Length; i++)
+        //    {
+        //        string result = a[i].ToString();
+        //        var intList = result.Select(digit => int.Parse(digit.ToString())).Sum();
+        //        Console.WriteLine(intList);
+        //    }
 
-            return a.Length;
-        }
+        //    return a.Length;
+        //}
 
         public static bool HasNumberDividedByFive(this BigInteger[] array)
         {
@@ -100,7 +100,7 @@ namespace LINQTask
             return a;
         }
 
-        public static void GetSpecialLastTwoDigits(this BigInteger[] array)
+        public static List<string> GetSpecialLastTwoDigits(this BigInteger[] array)
         {
             BigInteger[] a = { 0}, c = { };
             List<BigInteger> list = new List<BigInteger>();
@@ -116,12 +116,49 @@ namespace LINQTask
 
                 }
             }
-            foreach (var f in list) Console.WriteLine(f);
             List<BigInteger> result = new List<BigInteger>();
             result = list.Where(x=> x!=0).Select(x => (BigInteger)x % 100).ToList();
-            foreach (var f in result) Console.WriteLine(f);
+            var resultStr = result.Select(x => x.ToString("00")).ToList();
+            return resultStr;
         }
 
+        public static int MaxSumSqrtDigits(this BigInteger[] array)
+        {
+            int res;
+            var a = array.Select(x => new
+            {
+                value = x,
+                sqrtSum = x.ToString().
+            Where(y => int.TryParse(y.ToString(), out res)).
+                Select(y => int.Parse(y.ToString())).
+                Select(y => y * y).
+                Sum(),
+
+            }).ToList();
+            int maxSum = a.Select(x => x.sqrtSum).Max();
+            var value = a.Where(x => (int)x.sqrtSum == maxSum);
+            foreach(var f in value)
+            {
+                return f.sqrtSum;
+            }
+            return 0;
+        }
+        public static double AverageCountOfZeros(this BigInteger[] array)
+        {
+            int res;
+            var a = array.Select(x => new
+            {
+                value = x,
+                countOfZeros = x.ToString().
+            Where(y => int.TryParse(y.ToString(), out res)).
+                Select(y => int.Parse(y.ToString())).
+                Where(y => y == 0).
+                Count(),
+
+            }).ToList();
+            double averageCount = a.Select(x => x.countOfZeros).Average();
+            return averageCount;
+        }
 
 
         public static int FindSumOfDigits(this BigInteger number)
@@ -143,7 +180,6 @@ namespace LINQTask
                 secondDigit = (BigInteger)number % 10;
                 number /= 10;
             }
-            Console.WriteLine(secondDigit);
             return (int)secondDigit;
         }
     }
